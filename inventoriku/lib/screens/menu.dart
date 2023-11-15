@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:inventoriku/widgets/left_drawer.dart';
+import 'package:inventoriku/screens/inventoriku_form.dart';
+import 'package:inventoriku/widgets/shop_card.dart';
+import 'package:inventoriku/screens/data_inventoriku.dart';
 
 class MyHomePage extends StatelessWidget {
     MyHomePage({Key? key}) : super(key: key);
+    final List<ShopItem> items = [
+    ShopItem("Lihat Produk", Icons.checklist, Colors.red),
+    ShopItem("Tambah Produk", Icons.add_shopping_cart, Colors.blue),
+    ShopItem("Logout", Icons.logout, Colors.green),
+];
 
     @override
     Widget build(BuildContext context) {
@@ -12,6 +20,7 @@ class MyHomePage extends StatelessWidget {
           'Inventoriku',
         ),
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         // Widget wrapper yang dapat discroll
         child: Padding(
@@ -53,19 +62,7 @@ class MyHomePage extends StatelessWidget {
     }
 }
 
-class ShopItem {
-  final String name;
-  final IconData icon;
-  final Color color;
 
-  ShopItem(this.name, this.icon, this.color);
-}
-
-final List<ShopItem> items = [
-    ShopItem("Lihat Produk", Icons.checklist, Colors.red),
-    ShopItem("Tambah Produk", Icons.add_shopping_cart, Colors.blue),
-    ShopItem("Logout", Icons.logout, Colors.green),
-];
 
 class ShopCard extends StatelessWidget {
   final ShopItem item;
@@ -84,6 +81,15 @@ class ShopCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
+                // Navigate ke route yang sesuai (tergantung jenis tombol)
+          if (item.name == "Tambah Barang") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ShopFormPage()));
+          }
+          else if (item.name == "Lihat Barang") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const DataPage()));
+          }
         },
         child: Container(
           // Container untuk menyimpan Icon dan Text
