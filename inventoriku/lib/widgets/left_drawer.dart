@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:inventoriku/screens/menu.dart';
 import 'package:inventoriku/screens/inventoriku_form.dart';
-import 'package:inventoriku/screens/data_inventoriku.dart';
+// import 'package:inventoriku/screens/data_inventoriku.dart';
+import 'package:inventoriku/screens/list_item.dart';
+
 
 
 
@@ -65,13 +67,13 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.library_books),
-            title: const Text('Lihat Barang'),
+            leading: const Icon(Icons.library_basket),
+            title: const Text('Daftar Produk'),
             onTap: () {
-              Navigator.pushReplacement(
+              Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const DataPage(),
+                    builder: (context) => const ProductPage(),
                   ));
             },
           ),

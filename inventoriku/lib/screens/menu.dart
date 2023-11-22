@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:inventoriku/widgets/left_drawer.dart';
 import 'package:inventoriku/screens/inventoriku_form.dart';
 import 'package:inventoriku/widgets/shop_card.dart';
-import 'package:inventoriku/screens/data_inventoriku.dart';
+// import 'package:inventoriku/screens/data_inventoriku.dart';
+import 'package:inventoriku/screens/list_item.dart';
+
 
 class MyHomePage extends StatelessWidget {
     MyHomePage({Key? key}) : super(key: key);
-    final List<ShopItem> items = [
-    ShopItem("Lihat Produk", Icons.checklist, Colors.red),
-    ShopItem("Tambah Produk", Icons.add_shopping_cart, Colors.blue),
+  final List<ShopItem> items = [
+    ShopItem("Lihat Barang", Icons.checklist, Colors.red),
+    ShopItem("Tambah Barang", Icons.add_shopping_cart, Colors.blue),
     ShopItem("Logout", Icons.logout, Colors.green),
 ];
 
@@ -32,7 +34,7 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                 child: Text(
-                  'PBP Shop', // Text yang menandakan toko
+                  'Inventoriku Store', // Text yang menandakan toko
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -62,58 +64,3 @@ class MyHomePage extends StatelessWidget {
     }
 }
 
-
-
-class ShopCard extends StatelessWidget {
-  final ShopItem item;
-
-  const ShopCard(this.item, {super.key}); // Constructor
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: item.color,
-      child: InkWell(
-        // Area responsive terhadap sentuhan
-        onTap: () {
-          // Memunculkan SnackBar ketika diklik
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!")));
-                // Navigate ke route yang sesuai (tergantung jenis tombol)
-          if (item.name == "Tambah Barang") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ShopFormPage()));
-          }
-          else if (item.name == "Lihat Barang") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const DataPage()));
-          }
-        },
-        child: Container(
-          // Container untuk menyimpan Icon dan Text
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
